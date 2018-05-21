@@ -14,14 +14,15 @@ TennisGame.prototype.playerTwoScores = function () {
 };
 
 TennisGame.prototype.isDeuce = function () {
-  return (this.playerOneScore === this.playerTwoScore && this.playerOneScore >= 3 && this.playerTwoScore >= 3);
+  return (this.playerOneScore == this.playerTwoScore && this.playerOneScore >= 3);
 };
 
 TennisGame.prototype.playerWithHighestScore = function () {
   if (this.playerOneScore > this.playerTwoScore) {
     return this.playerOne;
+  } else if (this.playerOneScore < this.playerTwoScore) {
+    return this.playerSecond;
   }
-  return this.playerSecond;
 };
 
 TennisGame.prototype.hasWinner = function () {
@@ -41,15 +42,15 @@ TennisGame.prototype.translateScore = function (score) {
 };
 
 TennisGame.prototype.getScore = function () {
-  if (TennisGame.prototype.hasWinner()) {
-    return (TennisGame.prototype.playerWithHighestScore() + ' wins');
-  } else if (TennisGame.prototype.hasAdvantage()) {
-    return ('Advantage ' + TennisGame.prototype.playerWithHighestScore());
-  } else if (TennisGame.prototype.isDeuce()) {
+  if (this.hasWinner()) {
+    return (this.playerWithHighestScore() + ' wins');
+  } else if (this.hasAdvantage()) {
+    return ('Advantage ' + this.playerWithHighestScore());
+  } else if (this.isDeuce()) {
     return 'Deuce';
   } else if (this.playerOneScore === this.playerTwoScore) {
-    return (TennisGame.prototype.translateScore(this.playerOneScore) + ' all');
+    return (this.translateScore(this.playerOneScore) + ' all');
   } else {
-    return TennisGame.prototype.translateScore(this.playerOneScore) + ', ' + TennisGame.prototype.translateScore(this.playerTwoScore);
+    return this.translateScore(this.playerOneScore) + ', ' + this.translateScore(this.playerTwoScore);
   }
 };
